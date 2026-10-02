@@ -1,0 +1,110 @@
+[
+    {
+        "Classifier": "SVM (RBF Kernel)",
+        "Modality": "Model 1: Iris Only",
+        "Accuracy": 0.7333333333333333,
+        "Precision": 0.7430555555555556,
+        "Recall": 0.7133333333333334,
+        "F1 Score": 0.7278911564625851,
+        "AUC": 0.8141777777777778
+    },
+    {
+        "Classifier": "SVM (RBF Kernel)",
+        "Modality": "Model 2: Fingerprint Only",
+        "Accuracy": 0.6266666666666667,
+        "Precision": 0.625,
+        "Recall": 0.6333333333333333,
+        "F1 Score": 0.6291390728476821,
+        "AUC": 0.6715111111111111
+    },
+    {
+        "Classifier": "SVM (RBF Kernel)",
+        "Modality": "Model 3: Iris + Fingerprint (Fusion)",
+        "Accuracy": 0.7433333333333333,
+        "Precision": 0.7517241379310344,
+        "Recall": 0.7266666666666667,
+        "F1 Score": 0.7389830508474576,
+        "AUC": 0.831111111111111
+    },
+    {
+        "Classifier": "Random Forest",
+        "Modality": "Model 1: Iris Only",
+        "Accuracy": 0.7366666666666667,
+        "Precision": 0.7414965986394558,
+        "Recall": 0.7266666666666667,
+        "F1 Score": 0.734006734006734,
+        "AUC": 0.8176444444444444
+    },
+    {
+        "Classifier": "Random Forest",
+        "Modality": "Model 2: Fingerprint Only",
+        "Accuracy": 0.6433333333333333,
+        "Precision": 0.6387096774193548,
+        "Recall": 0.66,
+        "F1 Score": 0.6491803278688525,
+        "AUC": 0.7152000000000001
+    },
+    {
+        "Classifier": "Random Forest",
+        "Modality": "Model 3: Iris + Fingerprint (Fusion)",
+        "Accuracy": 0.74,
+        "Precision": 0.74,
+        "Recall": 0.74,
+        "F1 Score": 0.74,
+        "AUC": 0.8169333333333334
+    },
+    {
+        "Classifier": "Hist Gradient Boosting",
+        "Modality": "Model 1: Iris Only",
+        "Accuracy": 0.75,
+        "Precision": 0.7483443708609272,
+        "Recall": 0.7533333333333333,
+        "F1 Score": 0.7508305647840532,
+        "AUC": 0.8224
+    },
+    {
+        "Classifier": "Hist Gradient Boosting",
+        "Modality": "Model 2: Fingerprint Only",
+        "Accuracy": 0.6466666666666666,
+        "Precision": 0.6506849315068494,
+        "Recall": 0.6333333333333333,
+        "F1 Score": 0.6418918918918919,
+        "AUC": 0.7056888888888889
+    },
+    {
+        "Classifier": "Hist Gradient Boosting",
+        "Modality": "Model 3: Iris + Fingerprint (Fusion)",
+        "Accuracy": 0.77,
+        "Precision": 0.7913669064748201,
+        "Recall": 0.7333333333333333,
+        "F1 Score": 0.7612456747404844,
+        "AUC": 0.8579555555555556
+    },
+    {
+        "Classifier": "Late Fusion Stacking",
+        "Modality": "Model 1: Iris Only",
+        "Accuracy": 0.7333333333333333,
+        "Precision": 0.7430555555555556,
+        "Recall": 0.7133333333333334,
+        "F1 Score": 0.7278911564625851,
+        "AUC": 0.8141777777777778
+    },
+    {
+        "Classifier": "Late Fusion Stacking",
+        "Modality": "Model 2: Fingerprint Only",
+        "Accuracy": 0.6266666666666667,
+        "Precision": 0.625,
+        "Recall": 0.6333333333333333,
+        "F1 Score": 0.6291390728476821,
+        "AUC": 0.6715111111111111
+    },
+    {
+        "Classifier": "Late Fusion Stacking",
+        "Modality": "Model 3: Iris + Fingerprint (Fusion)",
+        "Accuracy": 0.7666666666666667,
+        "Precision": 0.7777777777777778,
+        "Recall": 0.7466666666666667,
+        "F1 Score": 0.7619047619047619,
+        "AUC": 0.8448444444444444
+    }
+]

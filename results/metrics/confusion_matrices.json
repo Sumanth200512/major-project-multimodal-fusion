@@ -1,0 +1,122 @@
+{
+    "SVM (RBF Kernel) - Model 1: Iris Only": [
+        [
+            113,
+            37
+        ],
+        [
+            43,
+            107
+        ]
+    ],
+    "SVM (RBF Kernel) - Model 2: Fingerprint Only": [
+        [
+            93,
+            57
+        ],
+        [
+            55,
+            95
+        ]
+    ],
+    "SVM (RBF Kernel) - Model 3: Iris + Fingerprint (Fusion)": [
+        [
+            114,
+            36
+        ],
+        [
+            41,
+            109
+        ]
+    ],
+    "Random Forest - Model 1: Iris Only": [
+        [
+            112,
+            38
+        ],
+        [
+            41,
+            109
+        ]
+    ],
+    "Random Forest - Model 2: Fingerprint Only": [
+        [
+            94,
+            56
+        ],
+        [
+            51,
+            99
+        ]
+    ],
+    "Random Forest - Model 3: Iris + Fingerprint (Fusion)": [
+        [
+            111,
+            39
+        ],
+        [
+            39,
+            111
+        ]
+    ],
+    "Hist Gradient Boosting - Model 1: Iris Only": [
+        [
+            112,
+            38
+        ],
+        [
+            37,
+            113
+        ]
+    ],
+    "Hist Gradient Boosting - Model 2: Fingerprint Only": [
+        [
+            99,
+            51
+        ],
+        [
+            55,
+            95
+        ]
+    ],
+    "Hist Gradient Boosting - Model 3: Iris + Fingerprint (Fusion)": [
+        [
+            121,
+            29
+        ],
+        [
+            40,
+            110
+        ]
+    ],
+    "Late Fusion Stacking - Model 1: Iris Only": [
+        [
+            113,
+            37
+        ],
+        [
+            43,
+            107
+        ]
+    ],
+    "Late Fusion Stacking - Model 2: Fingerprint Only": [
+        [
+            93,
+            57
+        ],
+        [
+            55,
+            95
+        ]
+    ],
+    "Late Fusion Stacking - Model 3: Iris + Fingerprint (Fusion)": [
+        [
+            118,
+            32
+        ],
+        [
+            38,
+            112
+        ]
+    ]
+}
