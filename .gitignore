@@ -1,0 +1,26 @@
+# Python bytecode and environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+.pytest_cache/
+
+# Streamlit runtime
+.streamlit/secrets.toml
+
+# System files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Data directories (raw images kept local / cached)
+data/raw/
+data/processed/*.npy
+data/splits/*.npy
+
+# Large model artifacts (optional to keep tracked or untracked depending on git lfs)
+*.tmp

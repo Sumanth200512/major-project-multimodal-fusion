@@ -1,0 +1,26 @@
+{
+    "random_state": 42,
+    "feature_dimensions": {
+        "alteration": 295,
+        "gender_single": 297,
+        "gender_fusion": 594
+    },
+    "training_dataset": {
+        "alteration_train_samples": 4800,
+        "alteration_test_samples": 1200,
+        "multimodal_train_samples": 1200,
+        "multimodal_test_samples": 300,
+        "test_split_ratio": 0.2
+    },
+    "model_versions": {
+        "alteration_detector": "HistGradientBoostingClassifier",
+        "classifiers": [
+            "SVM (RBF Kernel)",
+            "Random Forest",
+            "Hist Gradient Boosting",
+            "Late Fusion Stacking"
+        ]
+    },
+    "created_at": "2026-10-02T09:27:21.083198+00:00",
+    "pipeline_version": "1.0.0"
+}
