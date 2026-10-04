@@ -136,8 +136,8 @@ def render_sidebar():
             st.warning("Training will execute feature extraction, train/test splitting (80/20), model fitting, and evaluation benchmark.")
             
             with st.expander("Training Configuration", expanded=False):
-                alt_samples = st.slider("Alteration Samples (per class)", 200, 3000, 1000, 200)
-                multi_cohort = st.slider("Multimodal Cohort Size (per gender)", 200, 1000, 500, 100)
+                alt_samples = st.slider("Alteration Samples (per class)", 200, 3000, 3000, 200)
+                multi_cohort = st.slider("Multimodal Cohort Size (per gender)", 200, 1000, 1000, 100)
                 force_extract = st.checkbox("Force Re-extract Features", value=False)
 
             if st.button("🚀 Start Training Pipeline", type="primary", use_container_width=True):
