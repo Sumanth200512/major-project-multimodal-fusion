@@ -88,6 +88,14 @@ class DatasetManager:
         Download datasets via kagglehub if missing, and link/copy to raw data directory.
         """
         results = {}
+
+        # Ensure base kagglehub cache directories exist to prevent [Errno 2] FileNotFoundError on Linux
+        soco_cache_dir = Path.home() / ".cache" / "kagglehub" / "datasets" / "ruizgara" / "socofing"
+        soco_cache_dir.mkdir(parents=True, exist_ok=True)
+
+        iris_cache_dir = Path.home() / ".cache" / "kagglehub" / "datasets" / "basnamhamedsalih" / "iris-datasetndgfi"
+        iris_cache_dir.mkdir(parents=True, exist_ok=True)
+
         soco_avail, soco_info = self.check_socofing_available()
         if not soco_avail or force:
             logger.info("Downloading SOCOFing via kagglehub...")
