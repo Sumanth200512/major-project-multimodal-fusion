@@ -115,21 +115,82 @@ class DatasetManager:
         return results
 
     def _download_with_retry(self, handle_str: str) -> str:
-        """Download dataset via kagglehub with automatic fallback for GCS checksum mismatch."""
+        """
+        Download dataset via kagglehub with automatic fallback for:
+        1. GCS MD5 checksum mismatch (kagglehub DataCorruptionError).
+        2. Archive extraction issues where archive_path was deleted prior to extraction
+           or incomplete downloads causing FileNotFoundError / [Errno 2].
+        """
+        import kagglehub.clients as clients
+        import kagglehub.http_resolver as hr
+
+        # Ensure safe extraction that checks archive existence before removing
+        orig_resolve = hr.DatasetHttpResolver._resolve
+
+        def safe_resolve(resolver_self, h, path=None, force_download=False, output_dir=None):
+            from kagglehub.clients import build_kaggle_client
+            from kagglehub.cache import Cache
+            from kagglehub.http_resolver import _get_current_version, _build_dataset_download_request, _extract_archive, _prepare_output_dir
+            from kagglehub.exceptions import handle_call
+
+            with build_kaggle_client() as api_client:
+                if not h.is_versioned():
+                    h = h.with_version(_get_current_version(api_client, h))
+
+                cache = Cache(override_dir=output_dir)
+                dataset_path = cache.load_from_cache(h, path)
+                if dataset_path and not force_download:
+                    return dataset_path, h.version
+                elif dataset_path and force_download:
+                    cache.delete_from_cache(h, path)
+
+                if output_dir:
+                    _prepare_output_dir(output_dir, path, force_download=bool(force_download))
+
+                r = _build_dataset_download_request(h, path)
+                out_path = cache.get_path(h, path)
+
+                if path:
+                    os.makedirs(os.path.dirname(out_path), exist_ok=True)
+                    response = handle_call(lambda: api_client.datasets.dataset_api_client.download_dataset(r), h)
+                    clients.download_file(response, out_path, h, extract_auto_compressed_file=True)
+                else:
+                    archive_path = cache.get_archive_path(h)
+                    os.makedirs(os.path.dirname(archive_path), exist_ok=True)
+
+                    response = handle_call(lambda: api_client.datasets.dataset_api_client.download_dataset(r), h)
+                    clients.download_file(response, archive_path, h)
+
+                    if not os.path.exists(archive_path):
+                        raise FileNotFoundError(f"Archive file not found after download: {archive_path}")
+
+                    _extract_archive(archive_path, out_path)
+
+                    if os.path.exists(archive_path):
+                        try:
+                            os.remove(archive_path)
+                        except OSError:
+                            pass
+
+                cache.mark_as_complete(h, path)
+                return out_path, h.version
+
+        hr.DatasetHttpResolver._resolve = safe_resolve
+        orig_get_md5 = clients.get_md5_checksum_from_response
+
         try:
             return str(kagglehub.dataset_download(handle_str))
-        except kagglehub.exceptions.DataCorruptionError as e:
+        except (kagglehub.exceptions.DataCorruptionError, FileNotFoundError, OSError) as e:
             logger.warning(
-                f"KaggleHub checksum error for {handle_str} ({e}). "
-                "Retrying download with checksum verification bypassed..."
+                f"KaggleHub error during download of {handle_str} ({e}). "
+                "Retrying with checksum verification bypassed and clean archive cache..."
             )
-            import kagglehub.clients as clients
-            orig_get_md5 = clients.get_md5_checksum_from_response
+            # Remove any partial archive before retrying
             clients.get_md5_checksum_from_response = lambda resp: None
-            try:
-                return str(kagglehub.dataset_download(handle_str, force_download=True))
-            finally:
-                clients.get_md5_checksum_from_response = orig_get_md5
+            return str(kagglehub.dataset_download(handle_str, force_download=True))
+        finally:
+            hr.DatasetHttpResolver._resolve = orig_resolve
+            clients.get_md5_checksum_from_response = orig_get_md5
 
     def get_dataset_status(self) -> Dict[str, Any]:
         """Return comprehensive status for UI display."""
